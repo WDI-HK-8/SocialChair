@@ -1,0 +1,28 @@
+{
+  "name": "social_chair",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WDI-HK-8/SocialChair.git"
+  },
+  "author": "Richard Li",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WDI-HK-8/SocialChair/issues"
+  },
+  "homepage": "https://github.com/WDI-HK-8/SocialChair#readme",
+  "dependencies": {
+    "bcrypt": "^0.8.4",
+    "handlebars": "^3.0.3",
+    "hapi": "^8.8.1",
+    "hapi-mongodb": "^3.0.0",
+    "joi": "^6.6.1",
+    "path": "^0.11.14",
+    "yar": "^3.0.3"
+  }
+}

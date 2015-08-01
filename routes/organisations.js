@@ -1,0 +1,1 @@
+var Auth = require('./auth');

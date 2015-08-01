@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+    </title>
+    <script src="../public/js/jquery.min.js"></script>
+    <script src="../public/js/index_page.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../public/css/index_page.css">
+  </head>
+  <body>
+    <div id="mainBody" class="col-lg-8 col-lg-offset-2">
+      <div id="leftIntro" class="col-lg-6">
+        <h1>Welcome to Social Chair</h1>
+        <p class="hidden-xs">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      </div>
+      <div id="rightBody" class="col-lg-offset-1 col-lg-4">
+
+
+        <form id="signinForm">
+          <h4><span>Sign in here.</span></h4>
+          <div class="form-group">
+            <input type="text" class="form-control" id="signinUsernameInput" placeholder="Username">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" id="signinPasswordInput" placeholder="Password">
+          </div>
+          <button class="btn btn-default" id="signinButton">Login</button>
+          <div class="alert alert-success" role="alert" id="alertSignoutSuccess">
+            <a href="#" class="alert-link">You have successfully signned out.</a>
+          </div>
+          <div class="alert alert-danger" role="alert" id="alertSigninIncorrect">
+            <a href="#" class="alert-link">Incorrect username/password.</a>
+          </div>
+        </form>
+
+
+
+        <form id="signupForm">
+          <h4><span>New to here? </span> Sign up</h4>
+          <div class="form-group">
+            <input type="text" class="form-control" id="signupFullnameInput" placeholder="Full name">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="signupUsernameInput" placeholder="Username">
+          </div>
+          <div class="form-group">
+            <input type="password" class="form-control" id="signupPasswordInput" placeholder="Password">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" id="signupEmailInput" placeholder="Email">
+          </div>
+          <button class="btn btn-default" id="signupButton">Sign up</button>
+          <div class="alert alert-info" role="alert" id="alertSignupName">
+            <a href="#" class="alert-link">Name must be between 3 - 20 characters long.</a>
+          </div>
+          <div class="alert alert-info" role="alert" id="alertSignupUsername">
+            <a href="#" class="alert-link">Username must be between 3 - 20 characters long.</a>
+          </div>
+          <div class="alert alert-info" role="alert" id="alertSignupPassword">
+            <a href="#" class="alert-link">Password must be between 6 - 20 characters long.</a>
+          </div>
+          <div class="alert alert-info" role="alert" id="alertSignupEmail">
+            <a href="#" class="alert-link">Please enter a valid email.</a>
+          </div>
+          <div class="alert alert-danger" role="alert" id="alertSignupExists">
+            <a href="#" class="alert-link">Username/email already exists.</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

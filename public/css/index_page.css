@@ -1,0 +1,54 @@
+body {
+   background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) );
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+   -o-background-size: cover;
+   background-size: cover;
+}
+
+#mainBody {
+  margin-top: 100px;
+}
+
+#leftIntro h1 {
+  font-family: "Arial Rounded MT Bold", Geneva, sans-serif;
+  font-size: 38px;
+  color: white
+}
+
+#leftIntro p {
+  color: white;
+  font-size: 25px;
+  margin-top: 20px
+}
+
+form {
+  background-color: white;
+  -khtml-opacity:.90;
+  -moz-opacity:.90;
+  -ms-filter:”alpha(opacity=90)”;
+  filter:alpha(opacity=90);
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0.90);
+  opacity:.90;
+  border-radius: 5px;
+  padding: 1px 10px 10px 10px;
+  margin: 10px 0px 10px 0px
+}
+
+form h4 {
+  color: grey;
+}
+form h4 span {
+  color: black;
+  font-size: 25px;
+  padding-bottom: 5px
+}
+
+.alert {
+  display: none;
+  margin: 5px 0px -5px 0px
+}
+
+#signoutButton {
+  display: none;
+}
