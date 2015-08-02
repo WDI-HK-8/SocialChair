@@ -43,8 +43,6 @@ exports.register = function(server, options, next) {
             user.first_name =   '';
             user.last_name =    '';
             user.profile_picture =   '';
-            var access_keys =   ['public'];
-            user.access_keys =  access_keys;
 
             Bcrypt.genSalt(10, function(err, salt){
               Bcrypt.hash(user.password, salt, function(err, encrypted){
@@ -78,38 +76,37 @@ exports.register = function(server, options, next) {
         handler: function(request, reply) {
           var user_id = encodeURIComponent(request.params.id);
           Auth.authenticated(request, function(result){
-            if (!result.authenticated || user_id != result.user_id) {
-              return reply({write_permission: false});
+            if (!result.authenticated || user_id !== result.user_id.toString()) {
+              return reply({writePermission: false});
             }
             var db = request.server.plugins['hapi-mongodb'].db;
             var user = request.payload.user;
 
-            return db.collection('users').update(
+            db.collection('users').update(
               {_id: result.user_id},
-              {
+              {$set : {
                 name:        user.screen_name,
                 email:       user.email,
                 first_name:  user.first_name,
                 last_name:   user.last_name
+              }
               },{},
               function(err, writeResult){
                 if (err) {
                   return reply ("Internal MongoDB error", err);
                 }
-                reply(writeResult);
+                return reply(writeResult);
               }
             );
           });
-
-
         },
         validate: {
           payload: {
             user: {
               screen_name: Joi.string().min(3).max(20).required(),
               email: Joi.string().email().max(50).required(),
-              first_name: Joi.string().min(3).max(20).required(),
-              last_name: Joi.string().min(3).max(20).required()
+              first_name: Joi.string().max(20),
+              last_name: Joi.string().max(20)
             }
           }
         }

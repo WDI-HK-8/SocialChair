@@ -24,7 +24,7 @@ var plugins = [
   { register: require('./routes/users.js')},
   { register: require('./routes/static-pages.js')},
   { register: require('./routes/sessions.js')},
-  // { register: require('./routes/organisations.js')},
+  { register: require('./routes/organisations.js')},
   // { register: require('./routes/events.js')},
   {
     register: require('yar'),
