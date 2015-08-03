@@ -10,7 +10,7 @@ exports.register = function(server, options, next) {
           if (!result.authenticated) {
             return reply.view("index");
           }
-          return reply.view("home");
+          return reply.view("my_event");
         });
       }
     },
