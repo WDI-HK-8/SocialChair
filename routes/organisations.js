@@ -21,7 +21,7 @@ exports.register = function(server, options, next) {
 
               organisation.owner_id =   result.user_id;
               organisation.admin_ids =  [result.user_id];
-              organisation.member_ids = [];
+              organisation.member_ids = [result.user_id];
 
               db.collection('organisations').insert(organisation, function(err, writeResult){
                 if (err) {
@@ -56,8 +56,8 @@ exports.register = function(server, options, next) {
           var publicAndJoinedQuery = {
             $or: [
               {private:     false},
-              {admin_ids:   {$in: [result.user_id]}},
-              {member_ids:  {$in: [result.user_id]}}
+              {admin_ids:   result.user_id},
+              {member_ids:  result.user_id}
             ]
           };
           db.collection('organisations').find(publicAndJoinedQuery).toArray(function(err, organisations){
@@ -124,6 +124,7 @@ exports.register = function(server, options, next) {
             var  organisation_id = encodeURIComponent(request.params.id);
             var db = request.server.plugins['hapi-mongodb'].db;
             var ObjectId = request.server.plugins['hapi-mongodb'].ObjectID;
+            var data = request.payload.organisation;
             db.collection('organisations').findOne({_id: ObjectId(organisation_id)}, function(err, organisation){
               if (err) { return reply('Internal MongoDB error', err);}
               if (organisation === null) {
@@ -138,10 +139,10 @@ exports.register = function(server, options, next) {
               db.collection('organisations').update(
                 {_id: ObjectId(organisation_id)},
                 {$set : {
-                  name:        request.payload.organisation.name,
-                  description: request.payload.organisation.description,
-                  location:    request.payload.organisation.location,
-                  private:     request.payload.organisation.private
+                  name:        data.name,
+                  description: data.description,
+                  location:    data.location,
+                  private:     data.private
                 }
                 },{},
                 function(err, writeResult){
