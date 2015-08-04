@@ -1,7 +1,6 @@
 $(document).ready(function(){
   var authenticationData;
   var usersData;
-  var myEventData;
 
   var Signout = function() {
   };
@@ -48,18 +47,6 @@ $(document).ready(function(){
     });
   };
 
-  LoadData.prototype.loadEventData = function() {
-    $.ajax({
-      method:   'GET',
-      async:    false,
-      url:      '/events',
-      success:  function(response) {
-        myEventData = response;
-        console.log(myEventData);
-      },
-    });
-  };
-
   var PrintData = function() {
   };
 
@@ -72,20 +59,9 @@ $(document).ready(function(){
     $('#screenName').text(screenName);
   };
 
-  PrintData.prototype.uncomingEvents = function() {
-
-  };
-
-  PrintData.prototype.potentialEvents = function() {
-    
-  };
-
-
-
   var initialLoad = new LoadData();
   initialLoad.loadAuthenticationData();
   initialLoad.loadUsersData();
-  initialLoad.loadEventData();
   console.log(authenticationData);
   console.log(usersData);
 

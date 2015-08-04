@@ -1,7 +1,6 @@
 $(document).ready(function(){
   var authenticationData;
   var usersData;
-  var myEventData;
 
   var Signout = function() {
   };
@@ -48,18 +47,6 @@ $(document).ready(function(){
     });
   };
 
-  LoadData.prototype.loadEventData = function() {
-    $.ajax({
-      method:   'GET',
-      async:    false,
-      url:      '/events',
-      success:  function(response) {
-        myEventData = response;
-        console.log(myEventData);
-      },
-    });
-  };
-
   var PrintData = function() {
   };
 
@@ -70,22 +57,14 @@ $(document).ready(function(){
     })[0].screen_name;
     console.log(screenName);
     $('#screenName').text(screenName);
+    if (window.location.href.split('/')[4] === authenticationData.user_id) {
+      $('#myProfile').addClass("active");
+    }
   };
-
-  PrintData.prototype.uncomingEvents = function() {
-
-  };
-
-  PrintData.prototype.potentialEvents = function() {
-    
-  };
-
-
 
   var initialLoad = new LoadData();
   initialLoad.loadAuthenticationData();
   initialLoad.loadUsersData();
-  initialLoad.loadEventData();
   console.log(authenticationData);
   console.log(usersData);
 

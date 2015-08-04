@@ -6,32 +6,32 @@ exports.register = function(server, options, next) {
   server.route([
     {
       method: 'POST',
-      path: '/organisations/{id}/join',
+      path: '/events/{id}/join',
       handler: function(request, reply){
         Auth.authenticated(request, function(result){
           if (!result.authenticated) {
             return reply(result);
           }
           var db = request.server.plugins['hapi-mongodb'].db;
-          var organisation_id = encodeURIComponent(request.params.id);
+          var event_id = encodeURIComponent(request.params.id);
           var ObjectId = request.server.plugins['hapi-mongodb'].ObjectID;
-          db.collection('organisations').findOne({_id: ObjectId(organisation_id)}, function(err, organisation){
+          db.collection('events').findOne({_id: ObjectId(event_id)}, function(err, eventData){
             if (err) { return reply('Internal MongoDB error', err);}
-            if (organisation === null) {
-              return reply({organisationExist: false });
+            if (eventData === null) {
+              return reply({eventExist: false });
             }
-            var member = organisation.member_ids.some(function (member) {
-              return member.equals(result.user_id.toString());
+            var going = eventData.going_ids.some(function (going) {
+              return going.equals(result.user_id.toString());
             });
-            if (organisation.owner_id.equals(result.user_id)){
-              return reply({owner: true}); //Owner cannot quit an organisation, see chown
+            if (eventData.owner_id.equals(result.user_id)){
+              return reply({owner: true}); //Owner cannot quit an event, see /chown
             }
-            if (member){
-              db.collection('organisations').update(
-                {_id: ObjectId(organisation_id)},
+            if (going){
+              db.collection('events').update(
+                {_id: ObjectId(event_id)},
                 {$pull: {
                   admin_ids:  result.user_id,
-                  member_ids: result.user_id
+                  going_ids:  result.user_id
                   }
                 },
                 function(err, writeResult){
@@ -42,10 +42,10 @@ exports.register = function(server, options, next) {
                 }
               );
             }else{
-              db.collection('organisations').update(
-                {_id: ObjectId(organisation_id)},
+              db.collection('events').update(
+                {_id: ObjectId(event_id)},
                 {$push: {
-                  member_ids: result.user_id
+                  going_ids: result.user_id
                   }
                 },
                 function(err, writeResult){
@@ -62,39 +62,39 @@ exports.register = function(server, options, next) {
     },
     {
       method: 'POST',
-      path: '/organisations/{id}/admin',
+      path: '/events/{id}/admin',
       handler: function(request, reply){
         Auth.authenticated(request, function(result){
           if (!result.authenticated) {
             return reply(result);
           }
           var db = request.server.plugins['hapi-mongodb'].db;
-          var organisation_id = encodeURIComponent(request.params.id);
+          var event_id = encodeURIComponent(request.params.id);
           var ObjectId = request.server.plugins['hapi-mongodb'].ObjectID;
-          var memberID = ObjectId(request.payload.organisation.memberID);
+          var memberID = ObjectId(request.payload.eventData.memberID);
           if (memberID.equals(result.user_id)) {
             return reply({suicide: true}); //Owner cannot remove himself from admin group
           }
-          db.collection('organisations').findOne({_id: ObjectId(organisation_id)}, function(err, organisation){
+          db.collection('events').findOne({_id: ObjectId(event_id)}, function(err, eventData){
             if (err) { return reply('Internal MongoDB error', err);}
-            if (organisation === null) {
-              return reply({organisationExist: false });
+            if (eventData === null) {
+              return reply({eventExist: false });
             }
-            if (!organisation.owner_id.equals(result.user_id)){
+            if (!eventData.owner_id.equals(result.user_id)){
               return reply({owner: false}); //Check if this user is an owner
             }
-            var member = organisation.member_ids.some(function (member) {
-              return member.equals(memberID.toString());
+            var going = eventData.going_ids.some(function (going) {
+              return going.equals(memberID.toString());
             });
-            if (!member){
-              return reply({member: false}); //Check if the given userID is a member
+            if (!going){
+              return reply({going: false}); //Check if the given userID is already going
             }
-            var admin = organisation.admin_ids.some(function (admin) {
+            var admin = eventData.admin_ids.some(function (admin) {
               return admin.equals(memberID.toString()); //Check if the given userID is an admin
             });
             if (admin){
-              db.collection('organisations').update(
-                {_id: ObjectId(organisation_id)},
+              db.collection('events').update(
+                {_id: ObjectId(event_id)},
                 {$pull: {
                   admin_ids:  memberID
                   }
@@ -107,8 +107,8 @@ exports.register = function(server, options, next) {
                 }
               );
             }else{
-              db.collection('organisations').update(
-                {_id: ObjectId(organisation_id)},
+              db.collection('events').update(
+                {_id: ObjectId(event_id)},
                 {$push: {
                   admin_ids: memberID
                   }
@@ -127,33 +127,33 @@ exports.register = function(server, options, next) {
     },
     {
       method: 'POST',
-      path: '/organisations/{id}/chown',
+      path: '/events/{id}/chown',
       handler: function(request, reply){
         Auth.authenticated(request, function(result){
           if (!result.authenticated) {
             return reply(result);
           }
           var db = request.server.plugins['hapi-mongodb'].db;
-          var organisation_id = encodeURIComponent(request.params.id);
+          var event_id = encodeURIComponent(request.params.id);
           var ObjectId = request.server.plugins['hapi-mongodb'].ObjectID;
-          var adminID = ObjectId(request.payload.organisation.adminID);
+          var adminID = ObjectId(request.payload.eventData.adminID);
           if (adminID.equals(result.user_id)) {
             return reply({suicide: true}); //Owner cannot transfer ownership to himself
           }
-          db.collection('organisations').findOne({_id: ObjectId(organisation_id)}, function(err, organisation){
+          db.collection('events').findOne({_id: ObjectId(event_id)}, function(err, eventData){
             if (err) { return reply('Internal MongoDB error', err);}
-            if (organisation === null) {
+            if (eventData === null) {
               return reply({organisationExist: false });
             }
-            if (!organisation.owner_id.equals(result.user_id)){
+            if (!eventData.owner_id.equals(result.user_id)){
               return reply({owner: false}); //Check if this user is an owner
             }
-            var admin = organisation.admin_ids.some(function (admin) {
+            var admin = eventData.admin_ids.some(function (admin) {
               return admin.equals(adminID.toString()); //Check if the given userID is an admin
             });
             if (admin){
-              db.collection('organisations').update(
-                {_id: ObjectId(organisation_id)},
+              db.collection('events').update(
+                {_id: ObjectId(event_id)},
                 {$set : {
                   owner_id:   adminID,
                   }
@@ -178,6 +178,6 @@ exports.register = function(server, options, next) {
 
 //Defining the description of the plugin
 exports.register.attributes = {
-  name: 'organisation-memberships-routes',
+  name: 'event-memberships-routes',
   version: '0.0.1'
 };

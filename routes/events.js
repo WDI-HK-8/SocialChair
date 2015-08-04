@@ -30,7 +30,7 @@ exports.register = function(server, options, next) {
               eventData.admin_ids     =   [result.user_id];
               eventData.time_created  =   new Date();
               eventData.open          =   true;
-              eventData.going_ids     =   [];
+              eventData.going_ids     =   [result.user_id];
               eventData.like_ids      =   [];
               db.collection('events').insert(eventData, function(err, writeResult){
                 if (err) {

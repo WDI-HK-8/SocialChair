@@ -27,6 +27,7 @@ var plugins = [
   { register: require('./routes/organisations.js')},
   { register: require('./routes/events.js')},
   { register: require('./routes/organisation-memberships.js')},
+  { register: require('./routes/event-memberships.js')},
   {
     register: require('yar'),
     options: {
