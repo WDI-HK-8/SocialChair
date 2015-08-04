@@ -131,7 +131,7 @@ exports.register = function(server, options, next) {
                 return reply({organisationExist: false });
               }
               var admin = organisation.admin_ids.some(function (admin) {
-                  return admin.equals(result.user_id.toString());
+                return admin.equals(result.user_id.toString());
               });
               if (!admin){
                 return reply({writePermission: false});

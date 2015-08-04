@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <title></title>
     <script src="../public/js/jquery.min.js"></script>
-    <script src="../public/js/my_event.js"></script>
+    <script src="../public/js/organisation.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../public/css/my_event.css">
+    <link rel="stylesheet" href="../public/css/organisation.css">
   </head>
   <body>
     <div class="col-sm-3" id="navColumn">
@@ -18,20 +18,19 @@
       <div id="bottomlinks">
         <ul>
           <li><a id="myProfile" href="#">                          My Profile       </a></li>
-          <li><a id="" href="#" class="active">                    Events           </a></li>
-          <li><a id="" href="#">                                   Organisations    </a></li>
+          <li><a id="" href="/my_event">            Events           </a></li>
+          <li><a id="" href="/my_organisation">                    Organisations    </a></li>
           <li><a id="slowShowButton" href="javascript: void(0)">   Enter access key </a></li>
           <form id="slowShowList" role="form">
             <div class="form-group">
               <input type="text" class="form-control" placeholder="24-digit access key" id="accessKeyInput">
             </div>
-            <select class="form-control">
+            <select class="form-control" id="accessKeyOptions">
               <option>Organisation</option>
               <option>Event</option>
             </select>
             <button class="btn btn-default" id="accessKeySubmitButton">Submit</button>
           </form>
-          <!-- <li id="slowShowList">adasd</li> -->
           <li id="signoutList" class="affix-bottom"><a id="signoutButton" href="#">                      Signout          </a></li>
         </ul>
       </div>

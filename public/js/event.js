@@ -72,4 +72,15 @@ $(document).ready(function(){
     $("#slowShowList" ).slideToggle('slow');
   });
 
+  $('#slowShowList').submit(function(e) {
+    e.preventDefault();
+    var key    = $('#accessKeyInput').val();
+    var option = $('#accessKeyOptions').val();
+    if (option === 'Organisation') {
+      window.location.href = '/organisation/' + key;
+    }else if (option === 'Event') {
+      window.location.href = '/event/' + key;
+    }
+  });
+
 });
