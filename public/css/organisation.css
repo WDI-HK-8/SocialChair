@@ -188,7 +188,11 @@ h1 {
   margin-bottom: 50px
 }
 
-#alertEventName, #alertEventDescription, #alertEventLocation, #modalDoneButton, #createSuccess, #alertEventStart, #alertEventEnd, #organisationEvents, #joinOrganisationButton, #editOrganisationButton, #quitOrganisationButton {
+#alertEventName, #alertEventDescription, #alertEventLocation, .modalDoneButton, #createSuccess, #alertEventStart, #alertEventEnd, #organisationEvents, #joinOrganisationButton, #editOrganisationButton, #quitOrganisationButton {
+  display: none;
+}
+
+#alertOrganisationName, #alertOrganisationDescription, #alertOrganisationLocation, .modalDoneButton, #updateSuccess {
   display: none;
 }
 
@@ -201,7 +205,7 @@ h1 {
   font-size: 40px
 }
 
-#createSuccess {
+#createSuccess, #updateSuccess {
   text-align: center;
 }
 

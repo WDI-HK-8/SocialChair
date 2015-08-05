@@ -43,7 +43,7 @@
       <button type="button" id="quitOrganisationButton" class="btn btn-primary btn-lg">
         Quit this organisation
       </button>
-      <button type="button" id="editOrganisationButton" class="btn btn-primary btn-lg">
+      <button type="button" id="editOrganisationButton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal2">
         Edit
       </button>
       <button type="button" id="joinOrganisationButton" class="btn btn-primary btn-lg">
@@ -145,9 +145,67 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" id="modalDoneButton">Done</button>
-            <button type="button" class="btn btn-default" id="modalCloseButton" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" id="modalSubmitButton">Submit</button>
+            <button type="button" class="btn btn-primary modalDoneButton">Done</button>
+            <button type="button" class="btn btn-default modalCloseButton" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary modalSubmitButton" id="eventSubmitButton">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit organisation form -->
+    <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Edit organisation</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" id="updateForm" role="form">
+              <div class="form-group">
+                <label class="control-label col-sm-2">Name: </label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="organisationNameInput" placeholder="Name of your organisation">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2">Location: </label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="organisationLocationInput" placeholder="Location of your organisation">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2">Description: </label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" rows="5" id="organisationDescriptionInput"></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <div class="checkbox">
+                    <label><input type="checkbox" id="privateCheckbox">Make it private</label>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="alert alert-info" role="alert" id="alertOrganisationName">
+              <a href="#" class="alert-link">Name must be between 3 - 50 characters long.</a>
+            </div>
+            <div class="alert alert-info" role="alert" id="alertOrganisationDescription">
+              <a href="#" class="alert-link">Maximum 2000 characters for description.</a>
+            </div>
+            <div class="alert alert-info" role="alert" id="alertOrganisationLocation">
+              <a href="#" class="alert-link">Maximum 200 characters for location.</a>
+            </div>
+            <div class="alert alert-success" role="alert" id="updateSuccess">
+              <h3>Congratulations!! Your organisation has beed updated.</h3>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary modalDoneButton">Done</button>
+            <button type="button" class="btn btn-default modalCloseButton" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary modalSubmitButton" id="organisationEditButton">Submit</button>
           </div>
         </div>
       </div>

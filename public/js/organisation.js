@@ -123,11 +123,15 @@ $(document).ready(function(){
 
   PrintData.prototype.organisationInfo = function() {
     $('#organisationName').text(organisationData.name);
+    $('#organisationNameInput').val(organisationData.name);
     $('#descriptionInfo').text(organisationData.description);
+    $('#organisationDescriptionInput').val(organisationData.description);
     $('#locationInfo').text(organisationData.location);
+    $('#organisationLocationInput').val(organisationData.location);
     $('#memberInfo').text(organisationData.member_ids.length);
     $('#idInfo').text(organisationData._id);
     $('#privateInfo').text((organisationData.private)? "private":"public");
+    $('#privateCheckbox').prop('checked', (organisationData.private)? true:false);
   };
 
   PrintData.prototype.organisationMembers = function() {
@@ -204,9 +208,9 @@ $(document).ready(function(){
       $('#eventID').text(reply.event_id);
       $('#createSuccess').show();
       $('#createForm').hide();
-      $('#modalCloseButton').hide();
-      $('#modalSubmitButton').hide();
-      $('#modalDoneButton').show();
+      $('.modalCloseButton').hide();
+      $('.modalSubmitButton').hide();
+      $('.modalDoneButton').show();
     };
 
     var errorCallBack = function(error){
@@ -286,9 +290,40 @@ $(document).ready(function(){
     });
   };
 
+  var Put = function() {
+  };
 
+  Put.prototype.updateOrganisation = function(payload) {
+    var successCallBack = function(reply){
+      $('#updateSuccess').show();
+      $('#updateForm').hide();
+      $('.modalCloseButton').hide();
+      $('.modalSubmitButton').hide();
+      $('.modalDoneButton').show();
+    };
 
-
+    var errorCallBack = function(error){
+      $('.alert').hide();
+      var x = error.responseJSON.validation.keys[0];
+      switch (x) {
+        case 'organisation.name':
+          return $('#alertOrganisationName').show();
+        case 'organisation.location':
+          return $('#alertOrganisationLocation').show();
+        case 'organisation.description':
+          return $('#alertOrganisationDescription').show();
+      }
+    };
+    $.ajax({
+      context: this,
+      method:   'PUT',
+      data:     payload,
+      dataType: 'JSON',
+      url:      '/organisations/' + organisationID,
+      success:  successCallBack,
+      error:    errorCallBack
+    });
+  };
 
 
 
@@ -342,11 +377,11 @@ $(document).ready(function(){
 
   var post = new Post();
 
-  $('#modalDoneButton').click(function(){
+  $('.modalDoneButton').click(function(){
     window.location.reload();
   });
 
-  $('#modalSubmitButton').click(function() {
+  $('#eventSubmitButton').click(function() {
     $('.alert').hide();
     post.createEvent({
       eventData: {
@@ -384,6 +419,21 @@ $(document).ready(function(){
     post.chown(organisationID, {
       organisation: {
         adminID: $(this).data("id")
+      }
+    });
+  });
+
+  var put = new Put();
+
+
+  $('#organisationEditButton').click(function() {
+    $('.alert').hide();
+    put.updateOrganisation({
+      organisation: {
+        name:         $('#organisationNameInput').val(),
+        description:  $('#organisationDescriptionInput').val(),
+        location:     $('#organisationLocationInput').val(),
+        private:      $('#privateCheckbox').is(':checked')
       }
     });
   });
