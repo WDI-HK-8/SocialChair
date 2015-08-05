@@ -45,11 +45,11 @@ exports.register = function(server, options, next) {
           payload: {
             eventData: {
               organisation_id:  Joi.string().required(),                    //NEED TO IMPROVE
-              name:             Joi.string().min(3).max(1000).required(),
-              description:      Joi.string().max(1000).required(),
-              location:         Joi.string().max(20).required(),
-              date:             Joi.string().max(20).required(),            //NEED TO IMPROVE
-              time:             Joi.string().max(20).required()             //NEED TO IMPROVE
+              name:             Joi.string().min(3).max(50).required(),
+              location:         Joi.string().max(200).required(),
+              start:            Joi.string().max(20).required(),            //NEED TO IMPROVE
+              end:              Joi.string().max(20).required(),             //NEED TO IMPROVE
+              description:      Joi.string().max(2000).required()
             }
           }
         }

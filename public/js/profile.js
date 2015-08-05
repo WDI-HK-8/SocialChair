@@ -1,6 +1,7 @@
 $(document).ready(function(){
   var authenticationData;
   var usersData;
+  var userID = window.location.href.split('/')[4];
 
   var Signout = function() {
   };
@@ -57,7 +58,7 @@ $(document).ready(function(){
     })[0].screen_name;
     console.log(screenName);
     $('#screenName').text(screenName);
-    if (window.location.href.split('/')[4] === authenticationData.user_id) {
+    if (userID === authenticationData.user_id) {
       $('#myProfile').addClass("active");
     }
   };
