@@ -1,8 +1,8 @@
 <div class="row header blue">
   <div class="cell">Name</div>
-  <div class="cell fixWidth">Permission</div>
-  <div class="cell fixWidth">Make admin</div>
-  <div class="cell fixWidth">Ownership</div>
-</div>';
+  <div class="cell fixWidth">Owner</div>
+  <div class="cell fixWidth">Members</div>
+  <div class="cell fixWidth">Join</div>
+</div>
 
 var joinHTML = (eventData.going_ids.indexOf(authenticationData.user_id) === -1) ? "<button type='button' class='btn btn-info joinButton' data-id='" + eventData._id + "'>Join</button>":"Joined" ;

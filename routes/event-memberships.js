@@ -171,6 +171,58 @@ exports.register = function(server, options, next) {
           });
         });
       }
+    },
+    {
+      method: 'POST',
+      path: '/events/{id}/like',
+      handler: function(request, reply){
+        Auth.authenticated(request, function(result){
+          if (!result.authenticated) {
+            return reply(result);
+          }
+          var db = request.server.plugins['hapi-mongodb'].db;
+          var event_id = encodeURIComponent(request.params.id);
+          var ObjectId = request.server.plugins['hapi-mongodb'].ObjectID;
+          db.collection('events').findOne({_id: ObjectId(event_id)}, function(err, eventData){
+            if (err) { return reply('Internal MongoDB error', err);}
+            if (eventData === null) {
+              return reply({eventExist: false });
+            }
+            var liked = eventData.like_ids.some(function (liked) {
+              return liked.equals(result.user_id.toString());
+            });
+            if (liked){
+              db.collection('events').update(
+                {_id: ObjectId(event_id)},
+                {$pull: {
+                  like_ids:  result.user_id,
+                  }
+                },
+                function(err, writeResult){
+                  if (err) {
+                    return reply ("Internal MongoDB error", err);
+                  }
+                  return reply(writeResult);
+                }
+              );
+            }else{
+              db.collection('events').update(
+                {_id: ObjectId(event_id)},
+                {$push: {
+                  like_ids: result.user_id
+                  }
+                },
+                function(err, writeResult){
+                  if (err) {
+                    return reply ("Internal MongoDB error", err);
+                  }
+                  return reply(writeResult);
+                }
+              );
+            }
+          });
+        });
+      }
     }
   ]);
   next(); //important

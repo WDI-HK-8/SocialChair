@@ -180,4 +180,13 @@ h1 {
 	font-variant: normal;
 	font-weight: 500;
 	line-height: 26.3999996185303px;
+  margin-bottom: 20px
+}
+
+.fixWidth {
+  width: 80px
+}
+
+.btn-info {
+  padding: 1px 8px 1px 8px
 }

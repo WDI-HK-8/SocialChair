@@ -151,6 +151,38 @@ exports.register = function(server, options, next) {
         });
         });
       }
+    },
+    {
+      method: 'DELETE',
+      path: '/events/{id}',
+      handler: function(request, reply){
+        Auth.authenticated(request, function(result){
+          if (!result.authenticated) {
+            return reply(result);
+          }
+          var db = request.server.plugins['hapi-mongodb'].db;
+          var event_id = encodeURIComponent(request.params.id);
+          var ObjectId = request.server.plugins['hapi-mongodb'].ObjectID;
+          db.collection('events').findOne({_id: ObjectId(event_id)}, function(err, eventData){
+            if (err) { return reply('Internal MongoDB error', err);}
+            if (eventData === null) {
+              return reply({organisationExist: false });
+            }
+            if (!eventData.owner_id.equals(result.user_id)){
+              return reply({owner: false}); //Check if this user is an owner
+            }
+            db.collection('events').remove(
+              {_id: ObjectId(event_id)},
+              function(err, writeResult){
+                if (err) {
+                  return reply ("Internal MongoDB error", err);
+                }
+                return reply(writeResult);
+              }
+            );
+          });
+        });
+      }
     }
   ]);
   next();
