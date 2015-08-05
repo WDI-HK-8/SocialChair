@@ -35,70 +35,81 @@
         </ul>
       </div>
     </div>
-    
+
+
     <div class="wrapper" id="top">
       <h1>Your organisations</h1>
-      <div class="table">
-        <div class="row header blue">
-          <div class="cell">
-            Name
-          </div>
-          <div class="cell">
-            Date
-          </div>
-          <div class="cell">
-            Time
-          </div>
-          <div class="cell">
-            Location
-          </div>
-        </div>
-        <div class="row">
-          <div class="cell">
-            ninjalug
-          </div>
-          <div class="cell">
-            misterninja@hotmail.com
-          </div>
-          <div class="cell">
-            ************
-          </div>
-          <div class="cell">
-            Yes
-          </div>
-        </div>
+
+      <button type="button" id="createOrganisationButton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+        Create one!
+      </button>
+
+
+
+      <div class="table" id="yourOrganisationsTable">
       </div>
     </div>
 
     <div class="wrapper" id="bottom">
       <h1>Public organisations</h1>
-      <div class="table">
-        <div class="row header blue">
-          <div class="cell">
-            Event
+      <div class="table" id="publicOrganisationsTable">
+      </div>
+    </div>
+
+
+    <!-- Create organisation form -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Create organisation</h4>
           </div>
-          <div class="cell">
-            Date
+          <div class="modal-body">
+            <form class="form-horizontal" id="createForm" role="form">
+              <div class="form-group">
+                <label class="control-label col-sm-2">Name: </label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="organisationNameInput" placeholder="Name of your organisation">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2">Location: </label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="organisationLocationInput" placeholder="Location of your organisation">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2">Description: </label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" rows="5" id="organisationDescriptionInput"></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <div class="checkbox">
+                    <label><input type="checkbox" id="privateCheckbox">Make it private</label>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="alert alert-info" role="alert" id="alertOrganisationName">
+              <a href="#" class="alert-link">Name must be between 3 - 50 characters long.</a>
+            </div>
+            <div class="alert alert-info" role="alert" id="alertOrganisationDescription">
+              <a href="#" class="alert-link">Maximum 2000 characters for description.</a>
+            </div>
+            <div class="alert alert-info" role="alert" id="alertOrganisationLocation">
+              <a href="#" class="alert-link">Maximum 200 characters for location.</a>
+            </div>
+            <div class="alert alert-success" role="alert" id="createSuccess">
+              <h3>Congratulations!! Your organisation ID: <br><br><span id="organisationID"></span></h3>
+            </div>
           </div>
-          <div class="cell">
-            Time
-          </div>
-          <div class="cell">
-            Location
-          </div>
-        </div>
-        <div class="row">
-          <div class="cell">
-            ninjalug
-          </div>
-          <div class="cell">
-            misterninja@hotmail.com
-          </div>
-          <div class="cell">
-            ************
-          </div>
-          <div class="cell">
-            Yes
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="modalDoneButton">Done</button>
+            <button type="button" class="btn btn-default" id="modalCloseButton" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="modalSubmitButton">Submit</button>
           </div>
         </div>
       </div>

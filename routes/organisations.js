@@ -14,31 +14,24 @@ exports.register = function(server, options, next) {
             }
             var db = request.server.plugins['hapi-mongodb'].db;
             var organisation = request.payload.organisation;
-            db.collection('organisations').count({name: organisation.name}, function(err, organisationExist){
-              if (organisationExist) {
-                return reply({organisationExist: true});
+            organisation.owner_id =   result.user_id;
+            organisation.admin_ids =  [result.user_id];
+            organisation.member_ids = [result.user_id];
+            db.collection('organisations').insert(organisation, function(err, writeResult){
+              if (err) {
+                return reply ("Internal MongoDB error", err);
               }
-
-              organisation.owner_id =   result.user_id;
-              organisation.admin_ids =  [result.user_id];
-              organisation.member_ids = [result.user_id];
-
-              db.collection('organisations').insert(organisation, function(err, writeResult){
-                if (err) {
-                  return reply ("Internal MongoDB error", err);
-                }
-                return reply({'organisation_id': organisation._id});
-              });
+              return reply({'organisation_id': organisation._id});
             });
           });
         },
         validate: {
           payload: {
             organisation: {
-              name: Joi.string().min(3).max(1000).required(),
-              description: Joi.string().max(1000).required(),
-              location: Joi.string().max(20).required(),
-              private: Joi.boolean().required().required()
+              name: Joi.string().min(3).max(50).required(),
+              description: Joi.string().max(2000).required(),
+              location: Joi.string().max(200).required(),
+              private: Joi.boolean().required()
             }
           }
         }

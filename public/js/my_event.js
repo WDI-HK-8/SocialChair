@@ -48,7 +48,7 @@ $(document).ready(function(){
     });
   };
 
-  LoadData.prototype.loadEventData = function() {
+  LoadData.prototype.loadEventsData = function() {
     $.ajax({
       method:   'GET',
       async:    false,
@@ -77,7 +77,7 @@ $(document).ready(function(){
   };
 
   PrintData.prototype.potentialEvents = function() {
-    
+
   };
 
 
@@ -85,7 +85,7 @@ $(document).ready(function(){
   var initialLoad = new LoadData();
   initialLoad.loadAuthenticationData();
   initialLoad.loadUsersData();
-  initialLoad.loadEventData();
+  initialLoad.loadEventsData();
   console.log(authenticationData);
   console.log(usersData);
 

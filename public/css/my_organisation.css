@@ -3,7 +3,7 @@ body {
   font-size: 14px;
   line-height: 20px;
   font-weight: 400;
-  color: #3b3b3b;
+  color: #212121;
   -webkit-font-smoothing: antialiased;
   font-smoothing: antialiased;
 }
@@ -176,4 +176,36 @@ h1 {
 	font-variant: normal;
 	font-weight: 500;
 	line-height: 26.3999996185303px;
+  float: left;
+  margin-bottom: 20px
+}
+
+#createOrganisationButton {
+  float: right;
+}
+
+.btn-group-lg>.btn, .btn-lg {
+    padding: 3px 5px 3px 5px;
+    margin-top: 10px
+}
+
+.fixWidth {
+  width: 80px
+}
+
+
+#alertOrganisationName, #alertOrganisationDescription, #alertOrganisationLocation, #modalDoneButton, #createSuccess {
+  display: none;
+}
+
+#organisationID {
+  font-size: 40px
+}
+
+#createSuccess {
+  text-align: center;
+}
+
+.btn-info {
+  padding: 1px 8px 1px 8px
 }
