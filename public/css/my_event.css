@@ -10,7 +10,7 @@ body {
 
 #navColumn {
   width: 300px;
-  background-color: #3F51B5;
+  background-color: #2196F3;
   color: #FFFFFF;
   margin:0;
   position: fixed;
@@ -85,7 +85,7 @@ body {
 
 #signoutList {
   position : absolute;
-  bottom   : 60px;
+  bottom   : 0px;
 }
 
 .dropdown-menu {
@@ -189,4 +189,8 @@ h1 {
 
 .btn-info {
   padding: 1px 8px 1px 8px
+}
+
+.left {
+  margin-right: 8px
 }

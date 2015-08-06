@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="../public/css/my_event.css">
     <script src="../public/js/jquery.min.js"></script>
@@ -17,10 +18,10 @@
       </div>
       <div id="bottomlinks">
         <ul>
-          <li><a id="myProfile" href="#">                          My Profile       </a></li>
-          <li><a id="" href="/my_event" class="active">            Events           </a></li>
-          <li><a id="" href="/my_organisation">                    Organisations    </a></li>
-          <li><a id="slowShowButton" href="javascript: void(0)">   Enter access key </a></li>
+          <li><a id="myProfile" href="#"><i class="fa fa-user fa-lg left"></i>                                My Profile       </a></li>
+          <li><a id="" href="/my_event"><i class="fa fa-calendar fa-lg left"></i>                             Events           </a></li>
+          <li><a id="" href="/my_organisation"><i class="fa fa-users fa-lg left"></i>                         Organisations    </a></li>
+          <li><a id="slowShowButton" href="javascript: void(0)"><i class="fa fa-calendar fa-key left"></i>    Secret password </a></li>
           <form id="slowShowList" role="form">
             <div class="form-group">
               <input type="text" class="form-control" placeholder="24-digit access key" id="accessKeyInput">
@@ -31,20 +32,20 @@
             </select>
             <button class="btn btn-default" id="accessKeySubmitButton">Submit</button>
           </form>
-          <li id="signoutList" class="affix-bottom"><a id="signoutButton" href="#">                      Signout          </a></li>
+          <li id="signoutList" class="affix-bottom"><a id="signoutButton" href="#"><i class="fa fa-hand-spock-o fa-lg left"></i>Signout</a></li>
         </ul>
       </div>
     </div>
 
 
     <div class="wrapper" id="top">
-      <h1>Your upcoming events..</h1>
+      <h1>Your upcoming events</h1>
       <div class="table" id="upcomingEventsTable">
       </div>
     </div>
 
     <div class="wrapper" id="bottom">
-      <h1>Events that host by your organisations..</h1>
+      <h1>Recommended events</h1>
       <div class="table" id="potentialEventsTable">
       </div>
     </div>

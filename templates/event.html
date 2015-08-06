@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../public/css/jquery.datetimepicker.css"/>
     <link rel="stylesheet" href="../public/css/event.css">
@@ -19,10 +20,10 @@
       </div>
       <div id="bottomlinks">
         <ul>
-          <li><a id="myProfile" href="#">                          My Profile       </a></li>
-          <li><a id="" href="/my_event">            Events           </a></li>
-          <li><a id="" href="/my_organisation">                    Organisations    </a></li>
-          <li><a id="slowShowButton" href="javascript: void(0)">   Enter access key </a></li>
+          <li><a id="myProfile" href="#"><i class="fa fa-user fa-lg left"></i>                                My Profile       </a></li>
+          <li><a id="" href="/my_event"><i class="fa fa-calendar fa-lg left"></i>                             Events           </a></li>
+          <li><a id="" href="/my_organisation"><i class="fa fa-users fa-lg left"></i>                         Organisations    </a></li>
+          <li><a id="slowShowButton" href="javascript: void(0)"><i class="fa fa-calendar fa-key left"></i>    Secret password </a></li>
           <form id="slowShowList" role="form">
             <div class="form-group">
               <input type="text" class="form-control" placeholder="24-digit access key" id="accessKeyInput">
@@ -33,13 +34,13 @@
             </select>
             <button class="btn btn-default" id="accessKeySubmitButton">Submit</button>
           </form>
-          <li id="signoutList" class="affix-bottom"><a id="signoutButton" href="#">                      Signout          </a></li>
+          <li id="signoutList" class="affix-bottom"><a id="signoutButton" href="#"><i class="fa fa-hand-spock-o fa-lg left"></i>Signout</a></li>
         </ul>
       </div>
     </div>
 
     <div class="wrapper" id="organisationInfo">
-      <h1 id="eventName"></h1>
+      <h1><i class="fa fa-calendar fa-lg"></i>&nbsp</h1><h1 id="eventName"></h1>
       <button type="button" id="deleteEventButton" class="btn btn-primary btn-lg">
         Delete this event
       </button>
@@ -64,12 +65,12 @@
       <p class="infoText">Location:         <span id="locationInfo">    </span></p>
       <p class="infoText">Organisation:     <span id="organisationNameInfo"></span></p>
       <p class="infoText">Likes:            <span id="likesInfo"></span></p>
-      <p class="infoText">Quick access key: <span id="idInfo"></span></p>
+      <p class="infoText">Secret password:  <span id="idInfo"></span></p>
     </div>
 
 
     <div class="wrapper" id="eventGoing">
-      <h1>Going</h1>
+      <h1>Who's going</h1>
       <div class="table" id="eventGoingTable">
       </div>
     </div>

@@ -10,7 +10,7 @@ body {
 
 #navColumn {
   width: 300px;
-  background-color: #3F51B5;
+  background-color: #2196F3;
   color: #FFFFFF;
   margin:0;
   position: fixed;
@@ -85,7 +85,7 @@ body {
 
 #signoutList {
   position : absolute;
-  bottom   : 60px;
+  bottom   : 0px;
 }
 
 .dropdown-menu {
@@ -157,7 +157,7 @@ body {
 }
 
 h1 {
-	font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+	/*font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;*/
 	font-style: normal;
 	font-variant: normal;
 	font-weight: 500;
@@ -172,7 +172,7 @@ h1 {
 }
 
 .fixWidth {
-  width: 80px
+  width: 120px
 }
 
 #eventName {
@@ -186,11 +186,16 @@ h1 {
 
 p {
   clear: both;
-  font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+  /*font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;*/
 	font-style: normal;
 	font-variant: normal;
   font-size: 20px;
-  margin-top: 20px
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+p>span {
+  font-weight: normal;
 }
 
 #likeEventButton, #unlikeEventButton, #withdrawEventButton, #editEventButton, #joinEventButton, #deleteEventButton {
@@ -206,4 +211,8 @@ p {
 
 #createSuccess{
   text-align: center;
+}
+
+.left {
+  margin-right: 8px
 }
