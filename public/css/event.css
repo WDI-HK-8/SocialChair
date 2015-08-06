@@ -199,3 +199,11 @@ p {
   margin-top: 25px;
   display: none;
 }
+
+#alertEventName, #alertEventDescription, #alertEventLocation, .modalDoneButton, #createSuccess, #alertEventStart, #alertEventEnd, #organisationEvents, #joinOrganisationButton, #editOrganisationButton, #quitOrganisationButton {
+  display: none;
+}
+
+#createSuccess{
+  text-align: center;
+}

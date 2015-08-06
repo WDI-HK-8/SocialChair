@@ -85,7 +85,7 @@ exports.register = function(server, options, next) {
             db.collection('users').update(
               {_id: result.user_id},
               {$set : {
-                name:        user.screen_name,
+                screen_name:        user.screen_name,
                 email:       user.email,
                 first_name:  user.first_name,
                 last_name:   user.last_name

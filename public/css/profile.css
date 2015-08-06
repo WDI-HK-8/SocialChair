@@ -229,3 +229,11 @@ p {
 #organisationsInfo, #editProfileButton {
   display: none;
 }
+
+#alertProfileName, #alertProfileFirstName, #alertProfileLastName, #alertProfileEmail, .modalDoneButton, #updateSuccess {
+  display: none;
+}
+
+#updateSuccess {
+  text-align: center;
+}

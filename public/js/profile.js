@@ -65,6 +65,23 @@ $(document).ready(function(){
     });
   };
 
+
+  var Post = function() {
+  };
+
+  Post.prototype.joinOrganisation = function(id) {
+    $.ajax({
+      context: this,
+      method:   'POST',
+      url:      '/organisations/' + id + '/join',
+      success:  function(reply){
+        console.log(reply);
+        window.location.reload();
+      },
+    });
+  };
+
+
   var PrintData = function() {
   };
 
@@ -81,9 +98,13 @@ $(document).ready(function(){
 
   PrintData.prototype.profileInfo = function() {
     $('#profileName').text(userData.screen_name);
+    $('#screenNameInput').val(userData.screen_name);
     $('#firstNameInfo').text(userData.first_name);
+    $('#firstNameInput').val(userData.first_name);
     $('#lastNameInfo').text(userData.last_name);
+    $('#lastNameInput').val(userData.last_name);
     $('#emailInfo').text(userData.email);
+    $('#emailInput').val(userData.email);
   };
 
   PrintData.prototype.organisationsData = function() {
@@ -123,6 +144,44 @@ $(document).ready(function(){
     }
   };
 
+  var Put = function(){
+  };
+
+  Put.prototype.updateProfile = function(payload) {
+    var successCallBack = function(reply){
+      console.log(reply);
+      $('#updateSuccess').show();
+      $('#createForm').hide();
+      $('.modalCloseButton').hide();
+      $('.modalSubmitButton').hide();
+      $('.modalDoneButton').show();
+    };
+
+    var errorCallBack = function(error){
+      $('.alert').hide();
+      var x = error.responseJSON.validation.keys[0];
+      switch (x) {
+        case 'user.screen_name':
+          return $('#alertProfileName').show();
+        case 'user.email':
+          return $('#alertProfileEmail').show();
+        case 'user.first_name':
+          return $('#alertProfileFirstName').show();
+        case 'user.last_name':
+          return $('#alertProfileLastName').show();
+      }
+    };
+    $.ajax({
+      context: this,
+      method:   'PUT',
+      data:     payload,
+      dataType: 'JSON',
+      url:      '/users/' + userID,
+      success:  successCallBack,
+      error:    errorCallBack
+    });
+  };
+
   var initialLoad = new LoadData();
   initialLoad.loadAuthenticationData();
   initialLoad.loadUsersData();
@@ -150,6 +209,31 @@ $(document).ready(function(){
     }else if (option === 'Event') {
       window.location.href = '/event/' + key;
     }
+  });
+
+
+  var post = new Post();
+
+  $('.joinOrganisationButton').click(function(){
+    post.joinOrganisation($(this).data("id"));
+  });
+
+  var put = new Put();
+
+  $('#profileSubmitButton').click(function() {
+    $('.alert').hide();
+    put.updateProfile({
+      user: {
+        screen_name:         $('#screenNameInput').val(),
+        email:               $('#emailInput').val(),
+        first_name:          $('#firstNameInput').val(),
+        last_name:           $('#lastNameInput').val(),
+      }
+    });
+  });
+
+  $('.modalDoneButton').click(function(){
+    window.location.reload();
   });
 
 });

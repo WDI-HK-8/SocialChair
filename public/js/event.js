@@ -91,13 +91,20 @@ $(document).ready(function(){
       return (e._id === authenticationData.user_id) ? true:false;
     })[0].screen_name;
     $('#eventName').text(eventData.name);
+    $('#eventNameInput').val(eventData.name);
     $('#descriptionInfo').text(eventData.description);
+    $('#eventDescriptionInput').val(eventData.description);
     $('#startTimeInfo').text(eventData.start);
+    $('#eventStartInput').val(eventData.start);
     $('#endTimeInfo').text(eventData.end);
+    $('#eventEndInput').val(eventData.end);
     $('#locationInfo').text(eventData.location);
+    $('#eventLocationInput').val(eventData.location);
     $('#organisationNameInfo').html("<a href=" + "'/organisation/" + eventData.organisation_id + "'>" + organisationData.name + "</a>");
     $('#likesInfo').text(eventData.like_ids.length);
     $('#idInfo').text(eventData._id);
+
+
   };
 
   PrintData.prototype.eventGoing = function() {
@@ -221,6 +228,62 @@ $(document).ready(function(){
   };
 
 
+  var Put = function() {
+  };
+
+  Put.prototype.updateEvent = function(payload) {
+    var successCallBack = function(reply){
+      console.log(reply);
+      $('#createSuccess').show();
+      $('#createForm').hide();
+      $('.modalCloseButton').hide();
+      $('.modalSubmitButton').hide();
+      $('.modalDoneButton').show();
+    };
+
+    var errorCallBack = function(error){
+      $('.alert').hide();
+      var x = error.responseJSON.validation.keys[0];
+      switch (x) {
+        case 'eventData.name':
+          return $('#alertEventName').show();
+        case 'eventData.description':
+          return $('#alertEventDescription').show();
+        case 'eventData.location':
+          return $('#alertEventLocation').show();
+        case 'eventData.start':
+          return $('#alertEventStart').show();
+        case 'eventData.end':
+          return $('#alertEventEnd').show();
+      }
+    };
+    $.ajax({
+      context: this,
+      method:   'PUT',
+      data:     payload,
+      dataType: 'JSON',
+      url:      '/events/' + eventID,
+      success:  successCallBack,
+      error:    errorCallBack
+    });
+  };
+
+  var Delete = function() {
+  };
+
+  Delete.prototype.deleteEvent = function() {
+    $.ajax({
+      context:  this,
+      method:   'DELETE',
+      url:      '/events/' + eventID,
+      success:  function(reply){
+        console.log(reply);
+        window.location.reload();
+      },
+    });
+  };
+
+
   var initialLoad = new LoadData();
   initialLoad.loadAuthenticationData();
   initialLoad.loadUsersData();
@@ -282,5 +345,40 @@ $(document).ready(function(){
       }
     });
   });
+
+  var put = new Put();
+
+  $('#eventSubmitButton').click(function() {
+    $('.alert').hide();
+    put.updateEvent({
+      eventData: {
+        name:              $('#eventNameInput').val(),
+        description:       $('#eventDescriptionInput').val(),
+        location:          $('#eventLocationInput').val(),
+        start:             $('#eventStartInput').val(),
+        end:               $('#eventEndInput').val(),
+      }
+    });
+  });
+
+  $('.modalDoneButton').click(function(){
+    window.location.reload();
+  });
+
+  $('.default_datetimepicker').datetimepicker({
+    formatTime:'H:i',
+    formatDate:'d.m.Y',
+    //defaultDate:'8.12.1986', // it's my birthday
+    defaultDate:'+03.01.1970', // it's my birthday
+    defaultTime:'10:00',
+    timepickerScrollbar:false
+  });
+
+  var del = new Delete();
+
+  $('#deleteEventButton').click(function(){
+    del.deleteEvent();
+  });
+
 
 });

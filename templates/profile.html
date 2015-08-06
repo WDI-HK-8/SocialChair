@@ -40,7 +40,7 @@
       <div id="profilePicDiv"><img id="profilePicImg" src="../public/images/cat.jpg"></div>
       <div id="profileInfo">
         <h1 id="profileName"></h1>
-        <button type="button" id="editProfileButton" class="btn btn-primary btn-lg">
+        <button type="button" id="editProfileButton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
           Edit
         </button>
         <p class="infoText">First name:      <span id="firstNameInfo"></span></p>
@@ -52,6 +52,71 @@
     <div class="wrapper" id="organisationsInfo">
       <h1>Organisations</h1>
       <div class="table" id="organisationsTable">
+      </div>
+    </div>
+
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Edit profile</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" id="createForm" role="form">
+              <div class="form-group">
+                <label class="control-label col-sm-3">Screen name: </label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="screenNameInput" placeholder="Your screen name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3">Email: </label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="emailInput" placeholder="Your email">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3">First name: </label>
+                <div class="col-sm-9">
+                    <input type="text" id="firstNameInput" class="form-control"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-3">Last name: </label>
+                <div class="col-sm-9">
+                    <input type="text" id="lastNameInput" class="form-control"/>
+                </div>
+              </div>
+            </form>
+
+            <div class="alert alert-info" role="alert" id="alertProfileName">
+              <a href="#" class="alert-link">Name must be between 3 - 20 characters long.</a>
+            </div>
+
+            <div class="alert alert-info" role="alert" id="alertProfileEmail">
+              <a href="#" class="alert-link">Please enter a valid email</a>
+            </div>
+
+            <div class="alert alert-info" role="alert" id="alertProfileFirstName">
+              <a href="#" class="alert-link">Maximum 20 characters for first name.</a>
+            </div>
+            <div class="alert alert-info" role="alert" id="alertProfileLastName">
+              <a href="#" class="alert-link">Maximum 20 characters for last name.</a>
+            </div>
+            <div class="alert alert-success" role="alert" id="updateSuccess">
+              <h3>Your profile has been updated. </h3>
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary modalDoneButton">Done</button>
+            <button type="button" class="btn btn-default modalCloseButton" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary modalSubmitButton" id="profileSubmitButton">Submit</button>
+          </div>
+        </div>
       </div>
     </div>
 

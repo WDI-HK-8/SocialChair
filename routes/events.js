@@ -85,9 +85,9 @@ exports.register = function(server, options, next) {
                   name:        eventData.name,
                   description: eventData.description,
                   location:    eventData.location,
-                  date:        eventData.date,
-                  time:        eventData.time,
-                  open:        eventData.open
+                  start:       eventData.start,
+                  end:         eventData.end,
+                  // open:        eventData.open
                 }
                 },{},
                 function(err, writeResult){
@@ -106,9 +106,9 @@ exports.register = function(server, options, next) {
               name:         Joi.string().min(3).max(1000).required(),
               description:  Joi.string().max(1000).required(),
               location:     Joi.string().max(20).required(),
-              date:         Joi.string().max(20).required(),  //Need fix
-              time:         Joi.string().max(20).required(),
-              open:         Joi.boolean().required()
+              start:        Joi.string().max(20).required(),  //Need fix
+              end:          Joi.string().max(20).required(),
+              // open:         Joi.boolean().required()
             }
           }
         }

@@ -4,10 +4,12 @@
     <meta charset="utf-8">
     <title></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../public/css/jquery.datetimepicker.css"/>
     <link rel="stylesheet" href="../public/css/event.css">
     <script src="../public/js/jquery.min.js"></script>
     <script src="../public/js/event.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="../public/js/jquery.datetimepicker.js"></script>
   </head>
   <body>
     <div class="col-sm-3" id="navColumn">
@@ -47,7 +49,7 @@
       <button type="button" id="joinEventButton" class="btn btn-primary btn-lg">
         Join this event
       </button>
-      <button type="button" id="editEventButton" class="btn btn-primary btn-lg">
+      <button type="button" id="editEventButton" class="btn btn-primary btn-lg"  data-toggle="modal" data-target="#myModal">
         Edit
       </button>
       <button type="button" id="likeEventButton" class="btn btn-primary btn-lg">
@@ -71,5 +73,77 @@
       <div class="table" id="eventGoingTable">
       </div>
     </div>
+
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Edit event</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" id="createForm" role="form">
+              <div class="form-group">
+                <label class="control-label col-sm-2">Name: </label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="eventNameInput" placeholder="Name of your event">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2">Location: </label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="eventLocationInput" placeholder="Location of your event">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2">Start: </label>
+                <div class="col-sm-10">
+                    <input type="text" id="eventStartInput" class="form-control default_datetimepicker"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2">End: </label>
+                <div class="col-sm-10">
+                    <input type="text" id="eventEndInput" class="form-control default_datetimepicker"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2">Description: </label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" rows="5" id="eventDescriptionInput"></textarea>
+                </div>
+              </div>
+            </form>
+            <div class="alert alert-info" role="alert" id="alertEventName">
+              <a href="#" class="alert-link">Name must be between 3 - 50 characters long.</a>
+            </div>
+            <div class="alert alert-info" role="alert" id="alertEventDescription">
+              <a href="#" class="alert-link">Maximum 2000 characters for description.</a>
+            </div>
+            <div class="alert alert-info" role="alert" id="alertEventLocation">
+              <a href="#" class="alert-link">Maximum 200 characters for location.</a>
+            </div>
+            <div class="alert alert-info" role="alert" id="alertEventStart">
+              <a href="#" class="alert-link">Please provide a start time.</a>
+            </div>
+            <div class="alert alert-info" role="alert" id="alertEventEnd">
+              <a href="#" class="alert-link">Please provide an end time.</a>
+            </div>
+            <div class="alert alert-success" role="alert" id="createSuccess">
+              <h3>Your event has been updated. </h3>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary modalDoneButton">Done</button>
+            <button type="button" class="btn btn-default modalCloseButton" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary modalSubmitButton" id="eventSubmitButton">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   </body>
 </html>
